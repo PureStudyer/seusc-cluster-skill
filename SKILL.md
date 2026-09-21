@@ -18,7 +18,7 @@ ssh -o BatchMode=yes -o ConnectTimeout=15 seusc 'hostname; whoami; pwd; type sba
 - `seusc` 是本机 SSH 别名，SSH 配置负责端口和密钥；不要写死回环端口、用户名、Account 或家目录。SSH 登录别名中的 user 不一定是集群用户名。
 - 连接失败时查 `seusc status` / `seusc doctor`。Windows 若未加入 PATH，可用 `& "$env:LOCALAPPDATA\Programs\SEUSC\seusc.exe" status`；先确认程序存在。验证码或失效登录交给用户在 SEU SC Bridge 中完成，不读取凭据、Cookie 或浏览器 profile。
 - 当前状态以远端查询和实际报错为准；分区数、空闲情况、QoS、软件版本不可沿用旧快照。官方文档：<https://sc.seu.edu.cn/docs/>。站点可能需要校园网/VPN，可通过本机网络读取公开文档。
-- 操作细节、本地 PowerShell/POSIX 命令、故障处理见 [使用文档](references/workflow.md)。首次传输、提交或诊断相关问题时读取对应章节。
+- 操作细节、本地 PowerShell/POSIX 命令、故障处理见 [独立操作手册](OPERATIONS.md)。首次传输、提交或诊断相关问题时读取对应章节。
 
 ## 传输与远端执行的关键约束
 

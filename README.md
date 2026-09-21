@@ -1,8 +1,26 @@
-# SEUSC Cluster Skill
+# SEUSC 集群操作手册与 Agent Skill
 
-让 CLI agent 通过 `ssh seusc` 使用东南大学超算集群的完整 Skill。
+让人和任意 CLI agent 通过 `ssh seusc` 使用东南大学超算集群。**支持直接读文档操作，也提供可选 Skill。**
 
 依赖 [SEU SC Bridge](https://github.com/PureStudyer/SEU-SC-Bridge) 提供本地 SSH、SFTP/scp 入口，覆盖从准备代码到回收计算结果的完整流程。适用于能读取 Skill/Markdown、执行本地终端命令的 agent。
+
+## 从这里开始
+
+| 使用方式 | 入口 | 是否需要安装 Skill |
+| --- | --- | --- |
+| 人工操作，或任何能读文档、执行命令的 agent | **[完整操作手册 OPERATIONS.md](OPERATIONS.md)** | 不需要 |
+| 支持 Skills 的 agent | [SKILL.md](SKILL.md) + 下方安装说明 | 可选 |
+
+**OPERATIONS.md 是独立、完整的单文件手册。** 它解释本地与远端命令的执行位置，提供第一次作业从上传到下载的完整流程、环境与资源选择、提交恢复和故障处理，并直接包含 CPU/GPU 脚本全文。只读这一份文档即可理解操作，不需要先读 Skill 或获取其他模板文件。
+
+给不支持 Skill 的 agent：
+
+```text
+阅读 OPERATIONS.md，按文档通过 ssh seusc 操作集群。
+检查当前项目的依赖，为它准备单 GPU 作业，先做 dry-run，不实际提交。
+```
+
+无需安装：可以克隆本仓库到任意工作目录，或单独保存手册再交给 agent。连接集群仍需要已登录的 SEU SC Bridge。
 
 ## 能做什么
 
@@ -23,7 +41,7 @@
 
 本仓库不包含桥接程序、账号或登录凭据。创建 Skill、查看资源或校验脚本不会自动授权运行计算任务。
 
-## 安装
+## 可选：安装为 Skill
 
 安装到 agent 的 Skills 目录，文件夹名使用 `seusc-cluster`。以下是默认 Codex Skills 目录；若设置了 `CODEX_HOME`，请改用其下的 `skills` 目录。若目标已存在，请先检查现有版本，不要直接覆盖自定义内容。
 
@@ -41,7 +59,7 @@ git clone https://github.com/PureStudyer/seusc-cluster-skill.git ~/.codex/skills
 
 也可下载 Release 压缩包，将其中的 `seusc-cluster` 文件夹放到对应 Skills 目录。重新打开或刷新 agent 会话后使用其 Skill 发现机制。
 
-其他 CLI agent 可直接读取本仓库的 [SKILL.md](SKILL.md)，并按其中链接读取参考文档和模板；不依赖 Codex 专有工具或 MCP。
+不使用 Skill 的 agent 直接阅读 [OPERATIONS.md](OPERATIONS.md)；不需要 `$seusc-cluster` 调用语法，也不依赖 Codex 专有工具或 MCP。
 
 ## 使用示例
 
@@ -66,8 +84,9 @@ git clone https://github.com/PureStudyer/seusc-cluster-skill.git ~/.codex/skills
 
 | 文件 | 用途 |
 | --- | --- |
-| [SKILL.md](SKILL.md) | agent 入口、关键约束与决策流程 |
-| [references/workflow.md](references/workflow.md) | 完整操作参考：连接、资源、传输、环境、作业和排错 |
+| [OPERATIONS.md](OPERATIONS.md) | 首选文档入口；独立完整手册，含连续上手示例及模板全文 |
+| [SKILL.md](SKILL.md) | 可选 Skill 入口、关键约束与决策流程 |
+| [references/workflow.md](references/workflow.md) | 旧版文档链接兼容入口 |
 | [assets/smoke.slurm](assets/smoke.slurm) | 最小验证作业，1 CPU、2 分钟 |
 | [assets/cpu.slurm](assets/cpu.slurm) | 单进程 CPU 模板，命令通过参数传入 |
 | [assets/gpu.slurm](assets/gpu.slurm) | 单 GPU 模板，命令通过参数传入 |
@@ -88,6 +107,6 @@ CPU/GPU 程序运行、MPI/DDP、容器与科研软件仍需针对具体任务�
 
 ## 项目关系与许可
 
-这是独立的集群使用 Skill；[SEU SC Bridge](https://github.com/PureStudyer/SEU-SC-Bridge) 是连接工具。两者均为非官方项目，未经东南大学官方背书。
+这是独立的集群操作文档与 Skill；[SEU SC Bridge](https://github.com/PureStudyer/SEU-SC-Bridge) 是连接工具。两者均为非官方项目，未经东南大学官方背书。
 
 [MIT License](LICENSE) · Copyright © 2026 PureStudyer
